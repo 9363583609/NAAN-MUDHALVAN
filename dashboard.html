@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Welcome, {{ current_user.username }}</h1>
+
+    <h2>Submit Blood Request</h2>
+    <form method="POST" action="{{ url_for('submit_blood_request') }}">
+        Blood Type: <input type="text" name="blood_type"><br>
+        Quantity: <input type="number" name="quantity"><br>
+        Urgency: <input type="text" name="urgency"><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <h2>Update Inventory</h2>
+    <form method="POST" action="{{ url_for('update_inventory') }}">
+        Blood Type: <input type="text" name="blood_type"><br>
+        Quantity: <input type="number" name="quantity"><br>
+        <button type="submit">Update Inventory</button>
+    </form>
+
+    <h2>Blood Requests</h2>
+    <ul>
+        {% for request in requests %}
+            <li>{{ request['BloodType'] }} - {{ request['Quantity'] }} units - Urgency: {{ request['Urgency'] }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Inventory</h2>
+    <ul>
+        {% for item in inventory %}
+            <li>{{ item['BloodType'] }} - {{ item['Quantity'] }} units</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
